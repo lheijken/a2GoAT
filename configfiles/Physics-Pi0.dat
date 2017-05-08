@@ -2,6 +2,10 @@
 # Config file for a Pi0 Analysis of GoAT-Trees
 #=======================================================================
 #
+Input-Directory: ~/work/DataFiles/AnalysedFiles/GoAT/MC/
+Input-File: GoAT_a2geant_gp_pi0p_epmgp_100kEvs_beamBre_1756ownTFF.root
+Output-Directory: ~/work/DataFiles/AnalysedFiles/GoAT/MC/
+
 # Set prompt and random windows (standard library and GH1 library)
 Set-Prompt-Cut: -6 6
 Add-Random-Cut: -500 -10

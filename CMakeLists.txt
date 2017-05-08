@@ -8,7 +8,7 @@ if(CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR AND NOT MSVC_IDE)
     "Also don't forget to delete the created CMakeCache.txt and CMakeFiles dir"
     )
 endif()
-    
+
 include(cmake/settings.cmake)
 include(cmake/doxygen.cmake)
 
@@ -26,7 +26,7 @@ include_directories(${ROOT_INCLUDES} ${CMAKE_SOURCE_DIR}/inc)
 link_directories(${ROOT_LIBRARY_DIR})
 
 include_directories(inc)
-set(ROOT_LIBRARIES "${ROOT_LIBRARIES} -lEG")
+set(ROOT_LIBRARIES ${ROOT_LIBRARIES} -lEG)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall")
 
@@ -45,7 +45,7 @@ set(GOAT_BASE
    inc/GTreeA2Geant.h
    inc/GHistManager.h
    inc/GTreeManager.h
-   inc/GConfigFile.h   
+   inc/GConfigFile.h
    src/GTree.cc
    src/GTreeTrack.cc
    src/GTreeDetectorHits.cc
@@ -124,16 +124,19 @@ add_executable(goat
    )
 target_link_libraries(goat ${LIBS} ${ROOT_LIBRARIES})
 
-add_executable(pi0-example
+add_executable(pi0
    ${GOAT_BASE}
    ${GOAT_GHIST}
    inc/PPhysics.h
    src/PPhysics.cc
    inc/PPi0Example.h
    src/PPi0Example.cc
-   src/pi0_example_main.cc
+   #src/pi0_example_main.cc
+   inc/PPi0Dal.h
+   src/PPi0Dal.cc
+   src/pi0Dal_main.cc
    )
-target_link_libraries(pi0-example ${LIBS} ${ROOT_LIBRARIES})
+target_link_libraries(pi0 ${LIBS} ${ROOT_LIBRARIES})
 
 # install some scripts to the bin directory
 # by creating symlinks

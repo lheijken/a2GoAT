@@ -319,6 +319,19 @@ void PPhysics::FillTime(const GTreeParticle& tree, Int_t particle_index, GH1* gH
 	}
 }
 
+void PPhysics::FillTime(const GTreeTrack& tree, Int_t particle_index, GH1* gHist)
+{
+    for (Int_t j = 0; j < GetTagger()->GetNTagged(); j++)
+    {
+        // Is tagger channel rejected by user?
+        if(GetTagger()->GetTaggedChannel(j) < TC_cut_min) continue;
+        if(GetTagger()->GetTaggedChannel(j) > TC_cut_max) continue;
+
+        time = GetTagger()->GetTaggedTime(j) - tree.GetTime(particle_index);
+        gHist->Fill(time);
+    }
+}
+
 void PPhysics::FillTimeCut(const GTreeParticle& tree, GH1* gHist)
 {
     for (Int_t i = 0; i < tree.GetNParticles(); i++)

@@ -8,12 +8,16 @@
 
 Period-Macro:	100000
 
+Input-Directory: ~/work/DataFiles/AnalysedFiles/acqu/MC/
+Input-File: Acqu_a2geant_gp_pi0p_epmgp_100kEvs_beamBre_1756ownTFF.root
+Output-Directory: ~/work/DataFiles/AnalysedFiles/GoAT/MC/
+
 CheckCBStability: 1 
 
 #-----------------------------------------------------------------------
 # Particle Reconstruction
 #-----------------------------------------------------------------------
-Do-Particle-Reconstruction: 1
+Do-Particle-Reconstruction: 0
 
 Cut-dE-E-CB-Proton: 	configfiles/cuts/CB_DeltaE-E_Proton.root Proton
 Cut-dE-E-CB-Pion: 	configfiles/cuts/CB_DeltaE-E_Pion.root Pion
@@ -27,7 +31,7 @@ Cut-dE-E-TAPS-Electron: configfiles/cuts/TAPS_DeltaE-E.root CutElectron
 #
 #Cut-TAPS-TOF:           configfiles/cuts/TAPS_TOF.root Hadron
 
-Do-Meson-Reconstruction: 1
+Do-Meson-Reconstruction: 0
 Cut-IM-Width-Pi0: 20
 Cut-IM-Width-Eta: 44
 Cut-IM-Width-Eta-Prime: 60
@@ -42,20 +46,20 @@ Cut-IM-Width-Eta-Prime: 60
 # Sort on number of raw particle tracks (total, CB, and TAPS)
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #		    Total 	CB	TAPS
-SortRaw-NTracks:    3-		0+	0+
+#SortRaw-NTracks:    3+		0+	0+
 
 
 # Sort on Trigger conditions (Crystal Ball Energy Sum)
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-SortRaw-CBEnergySum:	80+
+#SortRaw-CBEnergySum:	80+
 
 
 # Sort on reconstructed particle properties
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Sort-NParticles: 	2-
+#Sort-NParticles: 	3+
 
 #		Type		Number	Theta-min 	Theta-max
-Sort-Particle:	neutralPions	1=	0		180
+#Sort-Particle:	neutralPions	1=	0		180
 #Sort-Particle:	charged		1= 	0		180
 
 # Note: (I'll put this here while we don't have a manual)
