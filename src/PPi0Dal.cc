@@ -54,7 +54,8 @@ void	PPi0Dal::ProcessEvent()
                 FillTime(*GetTracks(),i,time_CBneu);
             }
             if(Ecry > 0.0 && Epid > 0.0){
-                EdE_CB->Fill(Ecry,Epid);
+                EdE_CBPID->Fill(Ecry,Epid);
+                EdEdcTh_CBPID->Fill(Ecry,Epid*sin(GetTracks()->GetTheta(i)));
             }
         }
     }
@@ -89,7 +90,9 @@ void    PPi0Dal::CreateHistograms()
 
     IM2g = new TH1F("IM2g","IM2g",1000,-0.5,999.5);
 
-    EdE_CB = new TH2F("EdE_CB","EdE_CB;E_{CB};E_{PID}",100,0.,1000.,100,0.,10.);
+    EdE_CBPID = new TH2F("EdE_CBPID","EdE_CBPID;E_{CB};dE_{PID}",200,0.,800.,200,0.,10.);
+    EdEdcTh_CBPID = new TH2F("EdEdcTh_CBPID","EdEdcTh_CBPID;E_{CB};dE_{PID}*sin(#theta)",200,0.,800.,200,0.,10.);
+
 
     TaggerAccScal = new TH1D("TaggerAccScal","TaggerAccScal",352,0,352);
 

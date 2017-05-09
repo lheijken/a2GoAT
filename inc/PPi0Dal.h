@@ -18,7 +18,8 @@ private:
 
     TH1*    IM2g;
 
-    TH2*    EdE_CB;
+    TH2*    EdE_CBPID;
+    TH2*    EdEdcTh_CBPID;
 
     TH1*	TaggerAccScal;
 
