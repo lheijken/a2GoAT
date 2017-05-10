@@ -41,6 +41,8 @@ void	PPi0Dal::ProcessEvent()
     //- My own PID.. maybe
     Track_neuCB.clear();
     Track_neuCB.resize(0);
+    Track_chaCB.clear();
+    Track_chaCB.resize(0);
     for(Int_t i=0; i<GetTracks()->GetNTracks(); i++){
         if(GetTracks()->HasCB(i)){
             FillTime(*GetTracks(),i,time_CB);
@@ -56,18 +58,24 @@ void	PPi0Dal::ProcessEvent()
             if(Ecry > 0.0 && Epid > 0.0){
                 EdE_CBPID->Fill(Ecry,Epid);
                 EdEdcTh_CBPID->Fill(Ecry,Epid*sin(GetTracks()->GetTheta(i)));
+                Track_chaCB.push_back(i);
             }
         }
     }
 
-    if(Track_neuCB.size()>1){
-        for(Int_t i=0; i<(Track_neuCB.size()-1); i++){
-            for(Int_t j=1; j<(Track_neuCB.size()); j++){
-                IM2g->Fill((GetTracks()->GetVector(i)+GetTracks()->GetVector(j)).M());
-            }
-        }
+    //- Just checking stuff
+    Int_t ind1, ind2, ind3;
+    if(Track_neuCB.size()==2){
+        ind1 = Track_neuCB[0];
+        ind2 = Track_neuCB[1];
+        IM2g->Fill((GetTracks()->GetVector(ind1)+GetTracks()->GetVector(ind2)).M());
     }
-
+    if(Track_neuCB.size()==1 && Track_chaCB.size()==2){
+        ind1 = Track_neuCB[0];
+        ind2 = Track_chaCB[0];
+        ind3 = Track_chaCB[1];
+        IMeeg[1]->Fill()
+    }
 }
 
 void	PPi0Dal::ProcessScalerRead()
@@ -89,6 +97,9 @@ void    PPi0Dal::CreateHistograms()
     time_cut_CB 	= new GH1("time_cut_CB", 	"time_cut_CB", 	1401, -700, 700);
 
     IM2g = new TH1F("IM2g","IM2g",1000,-0.5,999.5);
+    IMeeg[0] = new TH1F("IMeeg1N2C","IMeeg1N2C",1000,-0.5,999.5);
+    IMeeg[1] = new TH1F("IMeeg1N3C","IMeeg1N3C",1000,-0.5,999.5);
+
 
     EdE_CBPID = new TH2F("EdE_CBPID","EdE_CBPID;E_{CB};dE_{PID}",200,0.,800.,200,0.,10.);
     EdEdcTh_CBPID = new TH2F("EdEdcTh_CBPID","EdEdcTh_CBPID;E_{CB};dE_{PID}*sin(#theta)",200,0.,800.,200,0.,10.);

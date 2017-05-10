@@ -17,6 +17,7 @@ private:
     GH1*	time_cut_CB;
 
     TH1*    IM2g;
+    TH1*    IMeeg[2];
 
     TH2*    EdE_CBPID;
     TH2*    EdEdcTh_CBPID;
