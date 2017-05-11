@@ -109,6 +109,29 @@ void	PPi0Dal::ProcessEvent()
             IMeeg[2]->Fill((GetTracks()->GetVector(ind1)+GetTracks()->GetVector(inde[0])+GetTracks()->GetVector(inde[1])).M());
         }
     }
+    if(Track_neuCB.size()==1){
+        if(Track_chaCB.size()==3)
+            CombChTra[0]->Fill(1);
+        if(Track_chaCB.size()==2 && Track_chaTA.size()==1){
+            Int_t inde[2]; Int_t Nre=0;
+            for(Int_t i=0; i<2; i++){
+                if(GetTracks()->GetVetoEnergy(Track_chaCB[i]) < PIDeCut){
+                    inde[Nre]=Track_chaCB[i];
+                    Nre++;
+                }
+            }
+            if(Nre == 2)
+                CombChTra[0]->Fill(2);
+            if(Nre == 1)
+                CombChTra[0]->Fill(3);
+        }
+        if(Track_chaCB.size()==1 && Track_chaTA.size()==2){
+            if(GetTracks()->GetVetoEnergy(Track_chaCB[0]) < PIDeCut)
+                CombChTra[0]->Fill(4);
+            else
+                CombChTra[0]->Fill(5);
+        }
+    }
 
 }
 
